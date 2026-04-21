@@ -1,0 +1,202 @@
+# CMD: sudo dmesg | tail -n 200
+
+[    3.339302] systemd[1]: Condition check resulted in Platform Persistent Storage Archival being skipped.
+[    3.339909] systemd[1]: Starting Load/Save Random Seed...
+[    3.340517] systemd[1]: Starting Create System Users...
+[    3.342970] Adding 2097148k swap on /swapfile.  Priority:-2 extents:16 across:48365568k SS
+[    3.343016] systemd[1]: Activated swap /swapfile.
+[    3.343054] systemd[1]: Reached target Swaps.
+[    3.344169] systemd[1]: Started Journal Service.
+[    3.349053] systemd-journald[318]: Received client request to flush runtime journal.
+[    3.390175] loop0: detected capacity change from 0 to 8
+[    3.390265] loop1: detected capacity change from 0 to 152112
+[    3.390301] loop2: detected capacity change from 0 to 555496
+[    3.391013] loop3: detected capacity change from 0 to 1034424
+[    3.392132] loop4: detected capacity change from 0 to 187776
+[    3.393411] loop5: detected capacity change from 0 to 26472
+[    3.394281] loop6: detected capacity change from 0 to 79520
+[    3.395148] loop7: detected capacity change from 0 to 1000
+[    3.523273] mc: Linux media interface: v0.10
+[    3.543781] videodev: Linux video capture interface: v2.00
+[    3.570217] resource: resource sanity check: requesting [mem 0x00000000fedc0000-0x00000000fedcffff], which spans more than pnp 00:07 [mem 0xfedc0000-0xfedc7fff]
+[    3.570228] caller igen6_probe+0x1bb/0x5f0 [igen6_edac] mapping multiple BARs
+[    3.572168] EDAC MC0: Giving out device to module igen6_edac controller Intel_client_SoC MC#0: DEV 0000:00:00.0 (INTERRUPT)
+[    3.573764] EDAC MC1: Giving out device to module igen6_edac controller Intel_client_SoC MC#1: DEV 0000:00:00.0 (INTERRUPT)
+[    3.573809] EDAC igen6 MC1: HANDLING IBECC MEMORY ERROR
+[    3.573811] EDAC igen6 MC1: ADDR 0x7fffffffe0 
+[    3.573813] EDAC igen6 MC0: HANDLING IBECC MEMORY ERROR
+[    3.573815] EDAC igen6 MC0: ADDR 0x7fffffffe0 
+[    3.575101] EDAC igen6: v2.5.1
+[    3.576424] intel_pmc_core INT33A1:00:  initialized
+[    3.577347] ee1004 4-0050: 512 byte EE1004-compliant SPD EEPROM, read-only
+[    3.584789] mei_me 0000:00:16.0: enabling device (0000 -> 0002)
+[    3.594737] cdc_acm 3-3.3:1.0: ttyACM0: USB ACM device
+[    3.596346] dw-apb-uart.4: ttyS4 at MMIO 0x4010004000 (irq = 16, base_baud = 6250000) is a 16550A
+[    3.601018] cdc_acm 3-3.4:1.0: ttyACM1: USB ACM device
+[    3.603544] usbcore: registered new interface driver cdc_acm
+[    3.603549] cdc_acm: USB Abstract Control Model driver for USB modems and ISDN adapters
+[    3.609090] Creating 1 MTD partitions on "0000:00:1f.5":
+[    3.609099] 0x000000000000-0x000001000000 : "BIOS"
+[    3.625599] RAPL PMU: API unit is 2^-32 Joules, 3 fixed counters, 655360 ms ovfl timer
+[    3.625606] RAPL PMU: hw unit of domain pp0-core 2^-14 Joules
+[    3.625608] RAPL PMU: hw unit of domain package 2^-14 Joules
+[    3.625609] RAPL PMU: hw unit of domain pp1-gpu 2^-14 Joules
+[    3.628898] cryptd: max_cpu_qlen set to 1000
+[    3.661864] usbcore: registered new interface driver usbserial_generic
+[    3.662653] usbserial: USB Serial support registered for generic
+[    3.670253] cfg80211: Loading compiled-in X.509 certificates for regulatory database
+[    3.670581] Loaded X.509 cert 'sforshee: 00b28ddf47aef9cea7'
+[    3.670729] Loaded X.509 cert 'wens: 61c038651aabdcf94bd0ac7ff06c7248db18c600'
+[    3.678040] AVX2 version of gcm_enc/dec engaged.
+[    3.678134] AES CTR mode by8 optimization enabled
+[    3.680182] usbcore: registered new interface driver option
+[    3.681492] usbserial: USB Serial support registered for GSM modem (1-port)
+[    3.681770] option 3-4:1.0: GSM modem (1-port) converter detected
+[    3.682964] usbcore: registered new interface driver cdc_wdm
+[    3.684328] usb 3-4: GSM modem (1-port) converter now attached to ttyUSB0
+[    3.684382] option 3-4:1.1: GSM modem (1-port) converter detected
+[    3.684463] usb 3-4: GSM modem (1-port) converter now attached to ttyUSB1
+[    3.684480] option 3-4:1.2: GSM modem (1-port) converter detected
+[    3.684563] usb 3-4: GSM modem (1-port) converter now attached to ttyUSB2
+[    3.684613] option 3-4:1.3: GSM modem (1-port) converter detected
+[    3.685417] usb 3-4: GSM modem (1-port) converter now attached to ttyUSB3
+[    3.708008] qmi_wwan 3-4:1.4: cdc-wdm1: USB WDM device
+[    3.708990] qmi_wwan 3-4:1.4 wwan0: register 'qmi_wwan' at usb-0000:00:14.0-4, WWAN/QMI device, d2:fe:2c:b1:0e:3f
+[    3.709046] usbcore: registered new interface driver qmi_wwan
+[    3.751920] usb 3-3.2: This Realtek USB WiFi dongle (0x0bda:0x0179) is untested!
+[    3.751927] usb 3-3.2: Please report results to Jes.Sorensen@gmail.com
+[    3.799804] usb 3-3.2: Dumping efuse for RTL8188EU (0x200 bytes):
+[    3.799808] 00000000: 29 81 00 6c 0b 00 00 00 00 0c 00 00 00 00 00 00  )..l............
+[    3.799809] 00000010: 29 29 29 29 29 29 29 29 29 29 29 02 ff ff ff ff  ))))))))))).....
+[    3.799810] 00000020: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff  ................
+[    3.799810] 00000030: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff  ................
+[    3.799811] 00000040: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff  ................
+[    3.799811] 00000050: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff  ................
+[    3.799812] 00000060: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff  ................
+[    3.799812] 00000070: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff  ................
+[    3.799813] 00000080: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff  ................
+[    3.799813] 00000090: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff  ................
+[    3.799814] 000000a0: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff  ................
+[    3.799814] 000000b0: ff ff ff ff ff ff ff ff 20 1a 10 00 00 00 00 00  ........ .......
+[    3.799815] 000000c0: 00 00 00 10 00 00 00 00 00 03 ff ff ff ff ff ff  ................
+[    3.799815] 000000d0: da 0b 79 01 42 66 00 fc a3 86 28 4c 90 09 03 52  ..y.Bf....(L...R
+[    3.799816] 000000e0: 65 61 6c 74 65 6b 0d 03 38 30 32 2e 31 31 6e 20  ealtek..802.11n 
+[    3.799816] 000000f0: 4e 49 43 00 ff ff ff ff ff ff ff ff ff ff ff ff  NIC.............
+[    3.799817] 00000100: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff  ................
+[    3.799818] 00000110: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff  ................
+[    3.799818] 00000120: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff  ................
+[    3.799819] 00000130: 81 ae 96 2d 03 93 96 11 fc 8c 00 11 9b ff ff ff  ...-............
+[    3.799819] 00000140: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff  ................
+[    3.799820] 00000150: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff  ................
+[    3.799820] 00000160: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff  ................
+[    3.799821] 00000170: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff  ................
+[    3.799821] 00000180: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff  ................
+[    3.799822] 00000190: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff  ................
+[    3.799822] 000001a0: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff  ................
+[    3.799823] 000001b0: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff  ................
+[    3.799823] 000001c0: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff  ................
+[    3.799824] 000001d0: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff  ................
+[    3.799824] 000001e0: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff  ................
+[    3.799825] 000001f0: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff  ................
+[    3.799825] usb 3-3.2: RTL8188EU rev D (TSMC) romver 0, 1T1R, TX queues 2, WiFi=1, BT=0, GPS=0, HI PA=0
+[    3.799827] usb 3-3.2: RTL8188EU MAC: fc:a3:86:28:4c:90
+[    3.799828] usb 3-3.2: rtl8xxxu: Loading firmware rtlwifi/rtl8188eufw.bin
+[    3.801038] usb 3-3.2: Firmware revision 11.1 (signature 0x88e1)
+[    3.989513] i915 0000:00:02.0: [drm] VT-d active for gfx access
+[    3.993681] Console: switching to colour dummy device 80x25
+[    4.006760] i915 0000:00:02.0: vgaarb: deactivate vga console
+[    4.006833] i915 0000:00:02.0: [drm] Using Transparent Hugepages
+[    4.007230] i915 0000:00:02.0: vgaarb: VGA decodes changed: olddecodes=io+mem,decodes=io+mem:owns=io+mem
+[    4.008145] mei_hdcp 0000:00:16.0-b638ab7e-94e2-4ea2-a552-d1c54b627f04: bound 0000:00:02.0 (ops i915_hdcp_ops [i915])
+[    4.013118] i915 0000:00:02.0: [drm] Finished loading DMC firmware i915/adlp_dmc.bin (v2.20)
+[    4.029549] audit: type=1400 audit(1776672062.001:2): apparmor="STATUS" operation="profile_load" profile="unconfined" name="libreoffice-senddoc" pid=561 comm="apparmor_parser"
+[    4.029707] audit: type=1400 audit(1776672062.002:3): apparmor="STATUS" operation="profile_load" profile="unconfined" name="libreoffice-xpdfimport" pid=563 comm="apparmor_parser"
+[    4.030075] audit: type=1400 audit(1776672062.002:4): apparmor="STATUS" operation="profile_load" profile="unconfined" name="lsb_release" pid=552 comm="apparmor_parser"
+[    4.030107] audit: type=1400 audit(1776672062.002:5): apparmor="STATUS" operation="profile_load" profile="unconfined" name="nvidia_modprobe" pid=553 comm="apparmor_parser"
+[    4.030110] audit: type=1400 audit(1776672062.002:6): apparmor="STATUS" operation="profile_load" profile="unconfined" name="nvidia_modprobe//kmod" pid=553 comm="apparmor_parser"
+[    4.030242] audit: type=1400 audit(1776672062.002:7): apparmor="STATUS" operation="profile_load" profile="unconfined" name="libreoffice-oosplash" pid=560 comm="apparmor_parser"
+[    4.030520] audit: type=1400 audit(1776672062.002:8): apparmor="STATUS" operation="profile_load" profile="unconfined" name="/usr/bin/man" pid=558 comm="apparmor_parser"
+[    4.030524] audit: type=1400 audit(1776672062.002:9): apparmor="STATUS" operation="profile_load" profile="unconfined" name="man_filter" pid=558 comm="apparmor_parser"
+[    4.030526] audit: type=1400 audit(1776672062.002:10): apparmor="STATUS" operation="profile_load" profile="unconfined" name="man_groff" pid=558 comm="apparmor_parser"
+[    4.066938] snd_hda_intel 0000:00:1f.3: DSP detected with PCI class/subclass/prog-if info 0x040100
+[    4.067070] snd_hda_intel 0000:00:1f.3: enabling device (0000 -> 0002)
+[    4.095859] intel_tcc_cooling: TCC Offset locked
+[    4.096470] snd_hda_intel 0000:00:1f.3: DSP detected with PCI class/subclass/prog-if info 0x040100
+[    4.136733] intel_rapl_msr: PL4 support detected.
+[    4.136778] intel_rapl_common: Found RAPL domain package
+[    4.136783] intel_rapl_common: Found RAPL domain core
+[    4.136784] intel_rapl_common: Found RAPL domain uncore
+[    4.138665] snd_hda_intel 0000:00:1f.3: DSP detected with PCI class/subclass/prog-if info 0x040100
+[    4.193447] sof-audio-pci-intel-tgl 0000:00:1f.3: DSP detected with PCI class/subclass/prog-if info 0x040100
+[    4.241088] usbcore: registered new interface driver rtl8xxxu
+[    4.241102] snd_hda_intel 0000:00:1f.3: DSP detected with PCI class/subclass/prog-if info 0x040100
+[    4.241671] sof-audio-pci-intel-tgl 0000:00:1f.3: DSP detected with PCI class/subclass/prog-if info 0x040100
+[    4.243313] rtl8xxxu 3-3.2:1.0 wlxfca386284c90: renamed from wlan0
+[    4.958583] i915 0000:00:02.0: [drm] [ENCODER:235:DDI A/PHY A] failed to retrieve link info, disabling eDP
+[    4.970923] i915 0000:00:02.0: [drm] GT0: GuC firmware i915/adlp_guc_70.bin (70.12.1) is recommended, but only i915/adlp_guc_70.bin (70.5.1) was found
+[    4.970932] i915 0000:00:02.0: [drm] GT0: Consider updating your linux-firmware pkg or downloading from https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/tree/i915
+[    4.978850] i915 0000:00:02.0: [drm] GT0: GuC firmware i915/adlp_guc_70.bin version 70.5.1
+[    4.978858] i915 0000:00:02.0: [drm] GT0: HuC firmware i915/tgl_huc.bin version 7.9.3
+[    4.994967] i915 0000:00:02.0: [drm] GT0: HuC: authenticated for all workloads
+[    4.995315] i915 0000:00:02.0: [drm] GT0: GUC: submission enabled
+[    4.995317] i915 0000:00:02.0: [drm] GT0: GUC: SLPC enabled
+[    4.995738] i915 0000:00:02.0: [drm] GT0: GUC: RC enabled
+[    4.999019] mei_pxp 0000:00:16.0-fbf6fcf1-96cf-4e2e-a6a6-1bab8cbe36b1: bound 0000:00:02.0 (ops i915_pxp_tee_component_ops [i915])
+[    4.999254] i915 0000:00:02.0: [drm] Protected Xe Path (PXP) protected content support initialized
+[    5.045091] [drm] Initialized i915 1.6.0 20230929 for 0000:00:02.0 on minor 1
+[    5.045901] ACPI: video: Video Device [GFX0] (multi-head: yes  rom: no  post: no)
+[    5.046301] input: Video Bus as /devices/LNXSYSTM:00/LNXSYBUS:00/PNP0A08:00/LNXVIDEO:00/input/input5
+[    5.046442] snd_hda_intel 0000:00:1f.3: DSP detected with PCI class/subclass/prog-if info 0x040100
+[    5.046527] i915 display info: display version: 13
+[    5.046531] i915 display info: cursor_needs_physical: no
+[    5.046532] i915 display info: has_cdclk_crawl: yes
+[    5.046533] i915 display info: has_cdclk_squash: no
+[    5.046534] i915 display info: has_ddi: yes
+[    5.046535] i915 display info: has_dp_mst: yes
+[    5.046536] i915 display info: has_dsb: yes
+[    5.046537] i915 display info: has_fpga_dbg: yes
+[    5.046538] i915 display info: has_gmch: no
+[    5.046538] i915 display info: has_hotplug: yes
+[    5.046539] i915 display info: has_hti: no
+[    5.046540] i915 display info: has_ipc: yes
+[    5.046541] i915 display info: has_overlay: no
+[    5.046541] i915 display info: has_psr: yes
+[    5.046542] i915 display info: has_psr_hw_tracking: no
+[    5.046543] i915 display info: overlay_needs_physical: no
+[    5.046544] i915 display info: supports_tv: no
+[    5.046544] i915 display info: has_hdcp: yes
+[    5.046545] i915 display info: has_dmc: yes
+[    5.046546] i915 display info: has_dsc: yes
+[    5.046546] i915 display info: rawclk rate: 19200 kHz
+[    5.067428] snd_hda_intel 0000:00:1f.3: bound 0000:00:02.0 (ops i915_audio_component_bind_ops [i915])
+[    5.070100] fbcon: i915drmfb (fb0) is primary device
+[    5.070152] Console: switching to colour frame buffer device 240x67
+[    5.070159] i915 0000:00:02.0: [drm] fb0: i915drmfb frame buffer device
+[    5.108515] snd_hda_codec_realtek hdaudioC0D0: autoconfig for ALC269VC: line_outs=1 (0x14/0x0/0x0/0x0/0x0) type:speaker
+[    5.108523] snd_hda_codec_realtek hdaudioC0D0:    speaker_outs=0 (0x0/0x0/0x0/0x0/0x0)
+[    5.108525] snd_hda_codec_realtek hdaudioC0D0:    hp_outs=1 (0x15/0x0/0x0/0x0/0x0)
+[    5.108527] snd_hda_codec_realtek hdaudioC0D0:    mono: mono_out=0x0
+[    5.108528] snd_hda_codec_realtek hdaudioC0D0:    inputs:
+[    5.251678] input: HDA Intel PCH Headphone as /devices/pci0000:00/0000:00:1f.3/sound/card0/input6
+[    5.251742] input: HDA Intel PCH HDMI/DP,pcm=3 as /devices/pci0000:00/0000:00:1f.3/sound/card0/input7
+[    5.251820] input: HDA Intel PCH HDMI/DP,pcm=7 as /devices/pci0000:00/0000:00:1f.3/sound/card0/input8
+[    5.251877] input: HDA Intel PCH HDMI/DP,pcm=8 as /devices/pci0000:00/0000:00:1f.3/sound/card0/input9
+[    5.251917] input: HDA Intel PCH HDMI/DP,pcm=9 as /devices/pci0000:00/0000:00:1f.3/sound/card0/input10
+[    5.661618] wlxfca386284c90: authenticate with dc:51:93:09:80:c0 (local address=fc:a3:86:28:4c:90)
+[    5.661625] wlxfca386284c90: send auth to dc:51:93:09:80:c0 (try 1/3)
+[    5.664618] wlxfca386284c90: authenticated
+[    5.665600] wlxfca386284c90: associate with dc:51:93:09:80:c0 (try 1/3)
+[    5.671132] wlxfca386284c90: RX AssocResp from dc:51:93:09:80:c0 (capab=0x1c31 status=0 aid=14)
+[    5.671683] usb 3-3.2: rtl8xxxu_bss_info_changed: HT supported
+[    5.672418] wlxfca386284c90: associated
+[    5.813456] wlxfca386284c90: Limiting TX power to 30 (30 - 0) dBm as advertised by dc:51:93:09:80:c0
+[    6.357110] igb 0000:02:00.0 enp2s0: igb: enp2s0 NIC Link is Up 100 Mbps Full Duplex, Flow Control: RX
+[    8.478381] rfkill: input handler disabled
+[    9.014698] warning: `NetworkChangeNo' uses wireless extensions which will stop working for Wi-Fi 7 hardware; use nl80211
+[ 3976.786319] perf: interrupt took too long (2503 > 2500), lowering kernel.perf_event_max_sample_rate to 79000
+[ 8497.162888] perf: interrupt took too long (3147 > 3128), lowering kernel.perf_event_max_sample_rate to 63000
+[14103.025106] perf: interrupt took too long (3946 > 3933), lowering kernel.perf_event_max_sample_rate to 50000
+[25407.243041] perf: interrupt took too long (4946 > 4932), lowering kernel.perf_event_max_sample_rate to 40000
+[28744.891268] kauditd_printk_skb: 47 callbacks suppressed
+[28744.891271] audit: type=1400 audit(1776700802.689:58): apparmor="DENIED" operation="capable" class="cap" profile="/usr/sbin/cupsd" pid=479257 comm="cupsd" capability=12  capname="net_admin"
+[51912.201905] perf: interrupt took too long (6197 > 6182), lowering kernel.perf_event_max_sample_rate to 32000

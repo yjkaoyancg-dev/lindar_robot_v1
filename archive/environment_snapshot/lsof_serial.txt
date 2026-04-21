@@ -1,0 +1,4 @@
+# CMD: lsof /dev/serial/by-id/* 2>/dev/null || true
+
+COMMAND      PID   USER   FD   TYPE DEVICE SIZE/OFF NODE NAME
+robot_plc 169258 zwkj01   36u   CHR  166,1      0t0  548 /dev/serial/by-id/../../ttyACM1

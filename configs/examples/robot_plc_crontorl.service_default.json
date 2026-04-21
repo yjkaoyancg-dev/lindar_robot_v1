@@ -1,0 +1,25 @@
+{
+  "id": "robot_plc_crontorl",
+  "mode": "rtu",
+  "tcp": {
+    "ip": "127.0.0.1",
+    "port": 1502
+  },
+  "rtu": {
+    "device": "/dev/ttyUSB0",
+    "baud": 115200,
+    "parity": "N",
+    "data_bit": 8,
+    "stop_bit": 1,
+    "slave_id": 1
+  },
+  "byte_order": "big",
+  "trigger_service_name": "start_detection",
+  "topic_name": "robot_info",
+  "register_map": {
+    "cmd": 0,
+    "state": 1,
+    "position": 2,
+    "attitude": 8
+  }
+}

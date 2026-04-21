@@ -1,0 +1,3 @@
+# CMD: groups
+
+zwkj01 adm dialout cdrom sudo dip plugdev lpadmin lxd sambashare

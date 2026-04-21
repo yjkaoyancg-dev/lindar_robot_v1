@@ -1,0 +1,13 @@
+# CMD: systemctl status zwkjLidar --no-pager -l; echo; systemctl status zwkjDetect --no-pager -l; echo; systemctl status zwkjPlc --no-pager -l
+
+○ zwkjLidar.service - zwkj lidar node
+     Loaded: loaded (/etc/systemd/system/zwkjLidar.service; disabled; vendor preset: enabled)
+     Active: inactive (dead)
+
+○ zwkjDetect.service - zwkj lidar node
+     Loaded: loaded (/etc/systemd/system/zwkjDetect.service; disabled; vendor preset: enabled)
+     Active: inactive (dead)
+
+○ zwkjPlc.service - zwkj lidar node
+     Loaded: loaded (/etc/systemd/system/zwkjPlc.service; disabled; vendor preset: enabled)
+     Active: inactive (dead)

@@ -1,0 +1,16 @@
+{
+    "topic_name": "/pointcloud_BFZ9IEC9",
+    "feature_dir": "/opt/zwkj/templates",
+    "save_clusters_dir": "/home/zwkj01/robot_detect/clusters",
+    "is_pub_clusters": false,
+    "is_save_clusters": false,
+    "templates_distance_threshold": 0.75,
+    "voxel_size": 0.02,
+    "statistical_mean_k": 50,
+    "statistical_stddev_mul_thresh": 1.0,
+    "radius_search": 0.05,
+    "number_of_neighbours": 14,
+    "curvature_threshold": 0.07,
+    "smoothness_threshold": 20.0,
+    "pca_threshold_multiplier": 2.5
+}

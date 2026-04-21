@@ -1,0 +1,35 @@
+{
+    "devices": [
+        {
+            "id":"asd",
+            "name": "data_plc_01",
+            "operation_type": "data",
+            "comm": {
+                "type": "tcp",
+                "ip": "127.0.0.1",
+                "port": 1502
+            },
+            "slave_id": 1,
+            "interval_seconds": 1,
+            "byte_order": "little",
+            "tasks": [
+                {
+                    "address": 40001,
+                    "table": "test", 
+                    "column": "age",
+                    "whereKey" : "we",
+                    "whereKey-value":"5",
+                    "type": "float"
+                },
+                 {
+                    "address": 40002,
+                    "table": "test", 
+                    "column": "size",
+                    "whereKey" : "we",
+                    "whereKey-value":"5",
+                    "type": "float"
+                }
+            ]
+        }
+    ]
+}

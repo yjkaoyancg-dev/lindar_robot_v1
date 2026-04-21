@@ -1,0 +1,240 @@
+{
+    "devices": [
+        {
+            "byte_order": "big",
+            "comm": {
+                "ip": "172.24.18.103",
+                "port": 502,
+                "type": "tcp"
+            },
+            "device_seq": "CLEARANCE",
+            "heartbeat_interval_seconds": 1,
+            "id": "clearance_05d58a79_557b_11f0_891e_001b21be568a",
+            "interval_seconds": 1,
+            "operation_type": "rw",
+            "slave_id": 1,
+            "tasks": [
+                {
+                    "address": 0,
+                    "count": 1,
+                    "insertTask": {
+
+                    },
+                    "name": "orbitalState",
+                    "needRTpush": true,
+                    "source": "holding",
+                    "type": "int16"
+                },
+                {
+                    "address": 1,
+                    "count": 1,
+                    "insertTask": {
+
+                    },
+                    "name": "spiralState",
+                    "needRTpush": true,
+                    "source": "holding",
+                    "type": "int16"
+                },
+                {
+                    "address": 2,
+                    "count": 1,
+                    "insertTask": {
+
+                    },
+                    "name": "remoteLocal",
+                    "needRTpush": true,
+                    "source": "holding",
+                    "type": "int16"
+                },
+                {
+                    "address": 3,
+                    "count": 1,
+                    "insertTask": {
+
+                    },
+                    "name": "controlModel",
+                    "needRTpush": true,
+                    "source": "holding",
+                    "type": "int16"
+                },
+                {
+                    "address": 5,
+                    "count": 1,
+                    "insertTask": {
+
+                    },
+                    "name": "deviceState",
+                    "needRTpush": true,
+                    "source": "holding",
+                    "type": "int16"
+                },
+                {
+                    "address": 6,
+                    "count": 1,
+                    "insertTask": {
+
+                    },
+                    "name": "motorSpeed",
+                    "needRTpush": true,
+                    "source": "holding",
+                    "type": "int16"
+                },
+                {
+                    "address": 7,
+                    "count": 1,
+                    "insertTask": {
+
+                    },
+                    "name": "electric",
+                    "needRTpush": true,
+                    "source": "holding",
+                    "type": "int16"
+                },
+                {
+                    "address": 8,
+                    "count": 1,
+                    "insertTask": {
+
+                    },
+                    "name": "airPressure",
+                    "needRTpush": true,
+                    "source": "holding",
+                    "type": "int16"
+                },
+                {
+                    "address": 11,
+                    "count": 1,
+                    "insertTask": {
+
+                    },
+                    "name": "hyperflow",
+                    "needRTpush": true,
+                    "source": "holding",
+                    "type": "int16"
+                },
+                {
+                    "address": 12,
+                    "count": 1,
+                    "insertTask": {
+
+                    },
+                    "name": "lowTension",
+                    "needRTpush": true,
+                    "source": "holding",
+                    "type": "int16"
+                },
+                {
+                    "address": 13,
+                    "count": 1,
+                    "insertTask": {
+
+                    },
+                    "name": "highPressure",
+                    "needRTpush": true,
+                    "source": "holding",
+                    "type": "int16"
+                },
+                {
+                    "address": 14,
+                    "count": 1,
+                    "insertTask": {
+
+                    },
+                    "name": "MotorStall",
+                    "needRTpush": true,
+                    "source": "holding",
+                    "type": "int16"
+                },
+                {
+                    "address": 15,
+                    "count": 1,
+                    "insertTask": {
+
+                    },
+                    "name": "frequencyConversion",
+                    "needRTpush": true,
+                    "source": "holding",
+                    "type": "int16"
+                },
+                {
+                    "address": 16,
+                    "count": 1,
+                    "insertTask": {
+
+                    },
+                    "name": "scram",
+                    "needRTpush": true,
+                    "source": "holding",
+                    "type": "int16"
+                },
+                {
+                    "address": 28,
+                    "count": 1,
+                    "insertTask": {
+
+                    },
+                    "name": "autorun",
+                    "needRTpush": true,
+                    "source": "holding",
+                    "type": "int16"
+                },
+                {
+                    "address": 24,
+                    "count": 1,
+                    "insertTask": {
+
+                    },
+                    "name": "24",
+                    "needRTpush": true,
+                    "source": "holding",
+                    "type": "int16"
+                },
+                {
+                    "address": 25,
+                    "count": 1,
+                    "insertTask": {
+
+                    },
+                    "name": "25",
+                    "needRTpush": true,
+                    "source": "holding",
+                    "type": "int16"
+                },
+                {
+                    "address": 26,
+                    "count": 1,
+                    "insertTask": {
+
+                    },
+                    "name": "26",
+                    "needRTpush": true,
+                    "source": "holding",
+                    "type": "int16"
+                },
+                {
+                    "address": 27,
+                    "count": 1,
+                    "insertTask": {
+
+                    },
+                    "name": "27",
+                    "needRTpush": true,
+                    "source": "holding",
+                    "type": "int16"
+                },
+                {
+                    "address": 29,
+                    "count": 1,
+                    "insertTask": {
+
+                    },
+                    "name": "heartbeat",
+                    "needRTpush": true,
+                    "source": "holding",
+                    "type": "int16"
+                }
+            ]
+        }
+    ]
+}

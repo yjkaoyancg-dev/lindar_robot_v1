@@ -1,0 +1,8 @@
+# CMD: ls -l /dev/ttyUSB* /dev/ttyACM* 2>/dev/null
+
+crw-rw---- 1 root dialout 166, 0  4月 20 16:48 /dev/ttyACM0
+crw-rw---- 1 root dialout 166, 1  4月 20 16:48 /dev/ttyACM1
+crw-rw---- 1 root dialout 188, 0  4月 20 16:01 /dev/ttyUSB0
+crw-rw---- 1 root dialout 188, 1  4月 20 16:01 /dev/ttyUSB1
+crw-rw---- 1 root dialout 188, 2  4月 21 04:28 /dev/ttyUSB2
+crw-rw---- 1 root dialout 188, 3  4月 20 16:01 /dev/ttyUSB3

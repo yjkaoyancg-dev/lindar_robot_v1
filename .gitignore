@@ -1,0 +1,13 @@
+build/
+install/
+log/
+*.user
+*.swp
+*.swo
+.vscode/
+.idea/
+photonix_logs/
+*.tar.gz
+*.zip
+__pycache__/
+*.pyc

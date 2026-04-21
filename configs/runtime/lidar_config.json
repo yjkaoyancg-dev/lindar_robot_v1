@@ -1,0 +1,42 @@
+{
+    "lidar180": [],
+    "lidar80": [
+        [
+            {
+                "sn": "BFZ9IEC9",
+                "lidar": {
+                    "accumulated_frames": 2500
+                },
+                "filter": {
+                    "transform_to_world": [
+                        [1, 0, 0, 0],
+                        [0, 1, 0, 0],
+                        [0, 0, 1, 0],
+                        [0, 0, 0, 1]
+                    ],
+                    "voxel_size": 0.02,
+                    "passthrough": [
+                        {
+                            "field_name": "z",
+                            "limits": [-0.35, 0.95]
+                        },
+                        {
+                            "field_name": "y",
+                            "limits": [-0.85, 0.80]
+                        },
+                        {
+                            "field_name": "x",
+                            "limits": [0.0, 1.6]
+                        }
+                    ]
+                }
+            }
+        ]
+    ],
+    "alt": {
+        "enable": true,
+        "on_ms": 3500,
+        "guard_ms": 1000,
+        "start_delay_ms": 0
+    }
+}

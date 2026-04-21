@@ -1,0 +1,33 @@
+{
+    "devices": [
+        {
+            "id": "lbt_fc_plc_01",
+            "operation_type": "lbtfc",
+            "comm": {
+                "type": "rtu",
+                "device": "/dev/ttyUSB0",
+                "baudrate": 9600,
+                "parity": "N",
+                "data_bit": 8,
+                "stopbits": 1
+            },
+            "slave_id": 1,
+            "interval_seconds": 1,
+            "byte_order": "litte",
+            "tasks": {
+                "core_task": {
+                    "address": 32,
+                    "count": 28,
+                    "type": "int16",
+                    "source": "holding"
+                },
+                "child_tasks": [
+                    {
+                        "name": "dust",
+                        "idx": 0
+                    }
+                ]
+            }
+        }
+    ]
+}

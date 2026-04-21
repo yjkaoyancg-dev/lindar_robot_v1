@@ -1,0 +1,40 @@
+{
+   "devices": [
+       {
+           "id": "rw_plc_01",
+           "operation_type": "sz",
+           "comm": {
+               "type": "rtu",
+               "device": "/dev/ttyUSB0",
+               "baudrate": 9600,
+               "parity": "N",
+               "data_bit": 8,
+               "stopbits": 1            },
+           "slave_id": 1,
+           "interval_seconds": 1,
+           "byte_order": "litte",
+           "tasks": [
+               {
+                   "name": "fenchen",
+                   "address": 0,
+                   "count": 2,
+                   "type": "int16",
+                   "source": "input",
+                   "insertTask":{},
+                   "needRTpush":false
+       		},
+       		{
+                   "name": "decimal_point",
+                   "address": 1,
+                   "count": 2,
+                   "type": "int16",
+                   "source": "input",
+                   "insertTask":{},
+                   "needRTpush":false
+
+       		}
+           ]
+
+       }
+   ]
+}

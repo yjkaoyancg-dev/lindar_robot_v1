@@ -1,0 +1,9 @@
+# CMD: ls -l /dev/serial/by-id/
+
+总计 0
+lrwxrwxrwx 1 root root 13  4月 20 16:01 usb-1a86_USB_Single_Serial_5ACC004110-if00 -> ../../ttyACM0
+lrwxrwxrwx 1 root root 13  4月 20 16:01 usb-1a86_USB_Single_Serial_5ACC016039-if00 -> ../../ttyACM1
+lrwxrwxrwx 1 root root 13  4月 20 16:01 usb-Quectel_EM05-CN_0123456789ABCDEF-if00-port0 -> ../../ttyUSB0
+lrwxrwxrwx 1 root root 13  4月 20 16:01 usb-Quectel_EM05-CN_0123456789ABCDEF-if01-port0 -> ../../ttyUSB1
+lrwxrwxrwx 1 root root 13  4月 20 16:01 usb-Quectel_EM05-CN_0123456789ABCDEF-if02-port0 -> ../../ttyUSB2
+lrwxrwxrwx 1 root root 13  4月 20 16:01 usb-Quectel_EM05-CN_0123456789ABCDEF-if03-port0 -> ../../ttyUSB3

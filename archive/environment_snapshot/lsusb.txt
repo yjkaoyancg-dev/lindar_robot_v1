@@ -1,0 +1,12 @@
+# CMD: lsusb
+
+Bus 004 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
+Bus 003 Device 003: ID 2c7c:0125 Quectel Wireless Solutions Co., Ltd. EC25 LTE modem
+Bus 003 Device 007: ID 1a86:55d3 QinHeng Electronics USB Single Serial
+Bus 003 Device 006: ID 1a86:55d3 QinHeng Electronics USB Single Serial
+Bus 003 Device 005: ID 0bda:0179 Realtek Semiconductor Corp. RTL8188ETV Wireless LAN 802.11n Network Adapter
+Bus 003 Device 004: ID 09da:c10a A4Tech Co., Ltd. USB Mouse
+Bus 003 Device 002: ID 1a40:0101 Terminus Technology Inc. Hub
+Bus 003 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+Bus 002 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub

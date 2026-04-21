@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>plc_module</name>
+  <version>0.1.0</version>
+  <description>PLC 设备模块，支持多种类型通信模式和协议</description>
+  <maintainer email="911608720@qq.com">mwt</maintainer>
+  <license>MIT</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <!-- 编译时需要 -->
+  <build_depend>pkg-config</build_depend>
+
+  <!-- 构建导出给下游（下游 find_package 时可见） -->
+  <build_export_depend>rclcpp</build_export_depend>
+  <build_export_depend>std_msgs</build_export_depend>
+  <build_export_depend>nlohmann_json</build_export_depend>
+  <build_export_depend>common_utils</build_export_depend>
+  <build_export_depend>libmodbus-dev</build_export_depend>
+  <build_export_depend>libboost-all-dev</build_export_depend>
+
+  <!-- 运行期依赖 -->
+  <exec_depend>rclcpp</exec_depend>
+  <exec_depend>std_msgs</exec_depend>
+  <exec_depend>nlohmann_json</exec_depend>
+  <exec_depend>common_utils</exec_depend>
+  <exec_depend>libmodbus-dev</exec_depend>
+  <exec_depend>libboost-all-dev</exec_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>
