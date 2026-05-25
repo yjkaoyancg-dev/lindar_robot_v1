@@ -69,6 +69,14 @@ For PR2 device scan:
 
 This creates `operator_gui_pr2_device_scan.zip` in the repository root.
 
+For PR4 visualization:
+
+```bash
+./operator_gui/scripts/package_operator_gui_pr4.sh
+```
+
+This creates `operator_gui_pr4_visualization.zip` in the repository root.
+
 ## Install On Another IPC
 
 Copy `operator_gui_pr1.zip` to the target Ubuntu IPC, then run:
@@ -87,4 +95,10 @@ For PR2:
 
 ```bash
 ./operator_gui/scripts/install_operator_gui_pr2.sh operator_gui_pr2_device_scan.zip
+```
+
+For PR4:
+
+```bash
+./operator_gui/scripts/install_operator_gui_pr4.sh operator_gui_pr4_visualization.zip
 ```

@@ -66,6 +66,16 @@ class DeviceScanResult:
 
 
 @dataclass
+class PointCloudFrame:
+    topic: str = ""
+    frame_id: str = ""
+    point_count: int = 0
+    sampled_points: list[tuple[float, float, float]] = field(default_factory=list)
+    updated_at: datetime | None = None
+    note: str = ""
+
+
+@dataclass
 class AppState:
     dry_run: bool = True
     output_allowed: bool = False
@@ -77,3 +87,4 @@ class AppState:
     range_confidence: float | None = None
     topics: dict[str, TopicStatus] = field(default_factory=dict)
     device_scan: DeviceScanResult = field(default_factory=DeviceScanResult)
+    pointclouds: dict[str, PointCloudFrame] = field(default_factory=dict)

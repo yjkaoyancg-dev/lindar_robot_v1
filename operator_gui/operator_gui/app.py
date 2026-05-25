@@ -23,6 +23,7 @@ from .pages.device_status_page import DeviceStatusPage
 from .pages.logs_page import LogsPage
 from .pages.overview_page import OverviewPage
 from .pages.plc_page import PlcPage
+from .pages.pointcloud_page import PointCloudPage
 from .pages.result_page import ResultPage
 from .ros_worker import RosWorker
 from .style import APP_STYLE
@@ -79,6 +80,7 @@ class MainWindow(QMainWindow):
         self.overview_page = OverviewPage()
         self.device_page = DeviceStatusPage()
         self.device_scan_page = DeviceScanPage()
+        self.pointcloud_page = PointCloudPage()
         self.result_page = ResultPage()
         self.plc_page = PlcPage()
         self.logs_page = LogsPage(self.log_reader)
@@ -87,6 +89,7 @@ class MainWindow(QMainWindow):
             ("Overview", self.overview_page),
             ("Device Status", self.device_page),
             ("Device Scan", self.device_scan_page),
+            ("Point Cloud", self.pointcloud_page),
             ("Results", self.result_page),
             ("PLC Read Only", self.plc_page),
             ("Logs", self.logs_page),
@@ -119,7 +122,7 @@ class MainWindow(QMainWindow):
 
     def _start_ros_worker(self) -> None:
         self.thread = QThread(self)
-        self.worker = RosWorker()
+        self.worker = RosWorker(self._pointcloud_topics())
         self.worker.moveToThread(self.thread)
         self.thread.started.connect(self.worker.run)
         self.worker.status_changed.connect(self._on_ros_status)
@@ -128,6 +131,7 @@ class MainWindow(QMainWindow):
         self.worker.robot_info_range_changed.connect(self._on_robot_info_range)
         self.worker.range_detected_changed.connect(self._on_range_detected)
         self.worker.range_confidence_changed.connect(self._on_range_confidence)
+        self.worker.pointcloud_changed.connect(self._on_pointcloud)
         self.thread.start()
 
     def _on_ros_status(self, available: bool, message: str) -> None:
@@ -155,10 +159,15 @@ class MainWindow(QMainWindow):
         self.state.range_confidence = confidence
         self._refresh_pages()
 
+    def _on_pointcloud(self, frame) -> None:
+        self.state.pointclouds[frame.topic] = frame
+        self._refresh_pages()
+
     def _refresh_pages(self) -> None:
         self.overview_page.update_state(self.state)
         self.device_page.update_state(self.state)
         self.device_scan_page.render_state(self.state)
+        self.pointcloud_page.update_state(self.state)
         self.result_page.update_state(self.state)
         self.plc_page.update_state(self.state)
 
@@ -169,10 +178,29 @@ class MainWindow(QMainWindow):
         self.state.device_scan = result
         self._refresh_pages()
 
+    def _pointcloud_topics(self) -> list[str]:
+        topics = {
+            "/robot_pointcloud",
+            "/cluster_pointcloud",
+            "/range_detector/target_cloud",
+        }
+        for cfg in (self.state.runtime_config.detect_config, self.state.runtime_config.range_config):
+            topic = cfg.get("topic_name") if isinstance(cfg, dict) else None
+            if topic:
+                topics.add(str(topic))
+        lidar_config = self.state.runtime_config.lidar_config
+        for kind in ("lidar80", "lidar180"):
+            for group in lidar_config.get(kind, []) if isinstance(lidar_config.get(kind, []), list) else []:
+                if not isinstance(group, list):
+                    continue
+                for item in group:
+                    if isinstance(item, dict) and item.get("sn"):
+                        topics.add(f"/pointcloud_{item['sn']}")
+        return sorted(topics)
+
 
 def run_app(repo_root: Path) -> int:
     app = QApplication([])
     window = MainWindow(repo_root)
     window.show()
     return app.exec()
-

@@ -6,6 +6,7 @@ from datetime import datetime
 from PySide6.QtCore import QObject, QThread, Signal
 
 from .models import RobotPose, TopicStatus
+from .pointcloud_decoder import decode_pointcloud2
 
 
 class RosWorker(QObject):
@@ -15,9 +16,11 @@ class RosWorker(QObject):
     robot_info_range_changed = Signal(object)
     range_detected_changed = Signal(object)
     range_confidence_changed = Signal(object)
+    pointcloud_changed = Signal(object)
 
-    def __init__(self) -> None:
+    def __init__(self, pointcloud_topics: list[str] | None = None) -> None:
         super().__init__()
+        self.pointcloud_topics = pointcloud_topics or []
         self._running = False
         self._rclpy = None
         self._node = None
@@ -28,6 +31,7 @@ class RosWorker(QObject):
         try:
             import rclpy
             from geometry_msgs.msg import PoseStamped
+            from sensor_msgs.msg import PointCloud2
             from std_msgs.msg import Bool, Float32, String
 
             self._rclpy = rclpy
@@ -38,6 +42,13 @@ class RosWorker(QObject):
             self._node.create_subscription(PoseStamped, "/robot_info_range", self._on_robot_info_range, 10)
             self._node.create_subscription(Bool, "/range_detector/detected", self._on_range_detected, 10)
             self._node.create_subscription(Float32, "/range_detector/confidence", self._on_range_confidence, 10)
+            for topic in self.pointcloud_topics:
+                self._node.create_subscription(
+                    PointCloud2,
+                    topic,
+                    lambda msg, topic_name=topic: self._on_pointcloud(topic_name, msg),
+                    10,
+                )
             self.status_changed.emit(True, "ROS2 observer online")
 
             while self._running:
@@ -94,6 +105,11 @@ class RosWorker(QObject):
         self._touch_topic("/range_detector/confidence", f"{value:.3f}")
         self.range_confidence_changed.emit(value)
 
+    def _on_pointcloud(self, topic: str, msg) -> None:
+        frame = decode_pointcloud2(msg, topic)
+        self._touch_topic(topic, frame.note)
+        self.pointcloud_changed.emit(frame)
+
     def _parse_robot_info_json(self, text: str, source: str) -> RobotPose:
         try:
             payload = json.loads(text)
@@ -112,4 +128,3 @@ class RosWorker(QObject):
             )
         except Exception:
             return RobotPose(source=source, updated_at=datetime.now())
-
