@@ -122,3 +122,31 @@ PR5 export files are written to:
 ```text
 ~/deploy_v1/operator_gui_exports/
 ```
+
+## PR6 Output Gate
+
+PLC output writes are gated by `output_enabled` in `robot_plc_crontorl.json`.
+
+Default:
+
+```json
+"output_enabled": false
+```
+
+When false, the PLC node can still run and serve Modbus registers, but incoming
+detection results are not written into position, attitude, or confidence output
+registers. The GUI only displays this state; it does not toggle the gate.
+
+For PR6 packaging:
+
+```bash
+./operator_gui/scripts/package_operator_gui_pr6.sh
+```
+
+This creates `operator_gui_pr6_output_gate.zip` in the repository root.
+
+For PR6 install:
+
+```bash
+./operator_gui/scripts/install_operator_gui_pr6.sh operator_gui_pr6_output_gate.zip
+```

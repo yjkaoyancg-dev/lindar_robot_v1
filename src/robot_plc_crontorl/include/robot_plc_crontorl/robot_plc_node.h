@@ -48,6 +48,7 @@ class RobotPlcNode : public rclcpp::Node {
   std::string topic_name_{"robot_pose_json"};
   std::string trigger_service_name_{"robot_pose_start"};
   ByteOrder byte_order_{ByteOrder::BigEndian};
+  bool output_enabled_{false};
 };
 
 }  // namespace robot_plc_crontorl

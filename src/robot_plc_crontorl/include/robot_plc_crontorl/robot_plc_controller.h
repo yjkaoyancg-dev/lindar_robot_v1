@@ -23,6 +23,8 @@ class RobotPlcController : private PlcDevice {
   void handleCommandRegister(uint16_t value);
   void handleTriggerResponse(bool success);
   bool applyTopicPayload(const std::string& json_text);
+  void setOutputEnabled(bool enabled);
+  bool outputEnabled() const;
 
   RobotPlcState state() const;
   const std::vector<uint16_t>& registers() const;
@@ -36,6 +38,7 @@ class RobotPlcController : private PlcDevice {
   std::vector<uint16_t> registers_;
   uint16_t last_cmd_{0};
   bool trigger_ready_{false};
+  bool output_enabled_{false};
   int pending_trigger_requests_{0};
 };
 

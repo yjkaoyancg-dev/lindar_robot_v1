@@ -9,26 +9,31 @@ class PlcPage(QWidget):
     def __init__(self) -> None:
         super().__init__()
         layout = QVBoxLayout(self)
-        title = QLabel("PLC 通信（只读）")
+        title = QLabel("PLC Communication (Read Only)")
         title.setObjectName("Title")
         layout.addWidget(title)
 
-        self.dry_run = QLabel("DRY-RUN / 未允许输出 / PR1 不连接串口")
-        self.dry_run.setObjectName("BadgeDryRun")
-        layout.addWidget(self.dry_run)
+        self.gate_badge = QLabel("DRY-RUN / output gate disabled / no PLC writes from GUI")
+        self.gate_badge.setObjectName("BadgeDryRun")
+        layout.addWidget(self.gate_badge)
 
-        group = QGroupBox("PLC 配置")
+        group = QGroupBox("PLC Configuration")
         grid = QGridLayout(group)
         self.mode = QLabel("-")
         self.device = QLabel("-")
         self.slave = QLabel("-")
         self.topic = QLabel("-")
-        for row, (name, widget) in enumerate([
-            ("模式", self.mode),
-            ("串口/地址", self.device),
-            ("从站地址", self.slave),
-            ("结果 topic", self.topic),
-        ]):
+        self.output_enabled = QLabel("-")
+        self.effective_state = QLabel("-")
+        rows = [
+            ("Mode", self.mode),
+            ("Serial/address", self.device),
+            ("Slave ID", self.slave),
+            ("Result topic", self.topic),
+            ("Output gate", self.output_enabled),
+            ("Effective safety state", self.effective_state),
+        ]
+        for row, (name, widget) in enumerate(rows):
             grid.addWidget(QLabel(name), row, 0)
             grid.addWidget(widget, row, 1)
         layout.addWidget(group)
@@ -40,6 +45,7 @@ class PlcPage(QWidget):
     def update_state(self, state: AppState) -> None:
         cfg = state.runtime_config.plc_config
         mode = cfg.get("mode", "-")
+        enabled = bool(cfg.get("output_enabled", False))
         self.mode.setText(str(mode))
         if mode == "rtu":
             rtu = cfg.get("rtu", {})
@@ -50,5 +56,16 @@ class PlcPage(QWidget):
             self.device.setText(f"{tcp.get('ip', '-')}:{tcp.get('port', '-')}")
             self.slave.setText("-")
         self.topic.setText(str(cfg.get("topic_name", "-")))
-        self.raw_json.setPlainText(str(cfg))
+        self.output_enabled.setText("true" if enabled else "false")
 
+        if enabled:
+            self.gate_badge.setText("OUTPUT ENABLED by configuration / GUI remains read-only")
+            self.gate_badge.setObjectName("BadgeWarn")
+            self.effective_state.setText("enabled after PLC node restart")
+        else:
+            self.gate_badge.setText("DRY-RUN / output gate disabled / PLC result registers blocked")
+            self.gate_badge.setObjectName("BadgeDryRun")
+            self.effective_state.setText("safe: detection results are not written to output registers")
+        self.gate_badge.style().unpolish(self.gate_badge)
+        self.gate_badge.style().polish(self.gate_badge)
+        self.raw_json.setPlainText(str(cfg))

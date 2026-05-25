@@ -14,6 +14,7 @@
     "slave_id": 1
   },
   "byte_order": "big",
+  "output_enabled": false,
   "trigger_service_name": "start_detection",
   "topic_name": "robot_info",
   "register_map": {

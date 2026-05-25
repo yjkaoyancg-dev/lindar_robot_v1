@@ -63,6 +63,11 @@ bool RobotPlcController::applyTopicPayload(const std::string& json_text) {
     return false;
   }
 
+  if (!output_enabled_) {
+    clearDataRegisters();
+    return false;
+  }
+
   writeFloat(RegisterLayout::kPosition, payload->x);
   writeFloat(RegisterLayout::kPosition + 2, payload->y);
   writeFloat(RegisterLayout::kPosition + 4, payload->z);
@@ -73,6 +78,14 @@ bool RobotPlcController::applyTopicPayload(const std::string& json_text) {
   registers_[RegisterLayout::kState] =
       static_cast<uint16_t>(RobotPlcState::kReady);
   return true;
+}
+
+void RobotPlcController::setOutputEnabled(bool enabled) {
+  output_enabled_ = enabled;
+}
+
+bool RobotPlcController::outputEnabled() const {
+  return output_enabled_;
 }
 
 RobotPlcState RobotPlcController::state() const {
