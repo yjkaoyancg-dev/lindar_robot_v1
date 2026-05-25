@@ -16,10 +16,12 @@ from PySide6.QtWidgets import (
 )
 
 from .config_reader import ConfigReader
+from .export_service import ExportService
 from .log_reader import LogReader
 from .models import AppState, RobotPose, TopicStatus
 from .pages.device_scan_page import DeviceScanPage
 from .pages.device_status_page import DeviceStatusPage
+from .pages.export_page import ExportPage
 from .pages.logs_page import LogsPage
 from .pages.overview_page import OverviewPage
 from .pages.plc_page import PlcPage
@@ -36,6 +38,7 @@ class MainWindow(QMainWindow):
         self.state = AppState()
         self.config_reader = ConfigReader(repo_root)
         self.log_reader = LogReader()
+        self.export_service = ExportService()
         self.setWindowTitle("Lidar Robot Operator GUI - PR2 Read Only")
         self.resize(1280, 820)
         QApplication.instance().setStyleSheet(APP_STYLE)
@@ -84,6 +87,7 @@ class MainWindow(QMainWindow):
         self.result_page = ResultPage()
         self.plc_page = PlcPage()
         self.logs_page = LogsPage(self.log_reader)
+        self.export_page = ExportPage(self.export_service, self)
 
         pages = [
             ("Overview", self.overview_page),
@@ -92,6 +96,7 @@ class MainWindow(QMainWindow):
             ("Point Cloud", self.pointcloud_page),
             ("Results", self.result_page),
             ("PLC Read Only", self.plc_page),
+            ("Export", self.export_page),
             ("Logs", self.logs_page),
         ]
         self.nav_buttons: list[QPushButton] = []
@@ -170,6 +175,7 @@ class MainWindow(QMainWindow):
         self.pointcloud_page.update_state(self.state)
         self.result_page.update_state(self.state)
         self.plc_page.update_state(self.state)
+        self.export_page.update_state(self.state)
 
     def _start_device_scan(self) -> None:
         self.device_scan_page.start_scan(self.state.runtime_config)

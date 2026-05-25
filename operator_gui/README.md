@@ -77,6 +77,14 @@ For PR4 visualization:
 
 This creates `operator_gui_pr4_visualization.zip` in the repository root.
 
+For PR5 export:
+
+```bash
+./operator_gui/scripts/package_operator_gui_pr5.sh
+```
+
+This creates `operator_gui_pr5_export.zip` in the repository root.
+
 ## Install On Another IPC
 
 Copy `operator_gui_pr1.zip` to the target Ubuntu IPC, then run:
@@ -101,4 +109,16 @@ For PR4:
 
 ```bash
 ./operator_gui/scripts/install_operator_gui_pr4.sh operator_gui_pr4_visualization.zip
+```
+
+For PR5:
+
+```bash
+./operator_gui/scripts/install_operator_gui_pr5.sh operator_gui_pr5_export.zip
+```
+
+PR5 export files are written to:
+
+```text
+~/deploy_v1/operator_gui_exports/
 ```
