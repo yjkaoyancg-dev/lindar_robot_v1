@@ -1,0 +1,2 @@
+"""GUI page widgets."""
+
