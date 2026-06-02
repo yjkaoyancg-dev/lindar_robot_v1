@@ -1,11 +1,27 @@
 #pragma once
 
+#include <cctype>
 #include <string>
 #include <optional>
 #include <vector>
 #include <Eigen/Dense>
 
 #include "sensor/motor/base/plc_device_base.hpp"
+
+inline std::string makeRosSafeName(const std::string& value)
+{
+    std::string result;
+    result.reserve(value.size());
+    for (const unsigned char ch : value)
+    {
+        result.push_back(std::isalnum(ch) || ch == '_' ? static_cast<char>(ch) : '_');
+    }
+    if (result.empty() || std::isdigit(static_cast<unsigned char>(result.front())))
+    {
+        result.insert(result.begin(), '_');
+    }
+    return result;
+}
 
 /**
  * @brief 雷达类型（使用强类型枚举）

@@ -45,7 +45,7 @@ public:
      */
     LidarNode(const rclcpp::NodeOptions &options, const LidarConfig &lidar_config,
               const MotorConfig &motor_config, const FilterConfig &filter_config)
-        : rclcpp::Node("Lidar_" + lidar_config.sn, options), lidar_config_(lidar_config),
+        : rclcpp::Node("Lidar_" + makeRosSafeName(lidar_config.sn), options), lidar_config_(lidar_config),
           motor_config_(motor_config), filter_config_(filter_config), is_start_task_(false)
     {
         initAlt();
@@ -205,7 +205,7 @@ private:
         callback_group_ = this->create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive);
         // 初始化采集服务
         collect_service_ = this->create_service<std_srvs::srv::Trigger>(
-            "/collect_" + lidar_config_.sn,
+            "/collect_" + makeRosSafeName(lidar_config_.sn),
             std::bind(&LidarNode::handleTrigger, this, std::placeholders::_1, std::placeholders::_2),
             rclcpp::ServicesQoS(),
             callback_group_);

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from pathlib import Path
+import re
 
 from PySide6.QtCore import QThread, QTimer
 from PySide6.QtWidgets import (
@@ -205,8 +206,14 @@ class MainWindow(QMainWindow):
                     continue
                 for item in group:
                     if isinstance(item, dict) and item.get("sn"):
-                        topics.add(f"/pointcloud_{item['sn']}")
+                        topics.add(f"/pointcloud_{self._ros_safe_name(str(item['sn']))}")
         return sorted(topics)
+
+    def _ros_safe_name(self, value: str) -> str:
+        safe = re.sub(r"[^A-Za-z0-9_]", "_", value)
+        if not safe or safe[0].isdigit():
+            safe = f"_{safe}"
+        return safe
 
 
 def run_app(repo_root: Path) -> int:

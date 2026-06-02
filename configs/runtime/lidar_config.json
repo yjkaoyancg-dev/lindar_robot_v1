@@ -3,30 +3,30 @@
     "lidar80": [
         [
             {
-                "sn": "BFZ9IEC9",
+                "sn": "BAX49K59-ZWSCAN80",
                 "lidar": {
                     "accumulated_frames": 2500
                 },
                 "filter": {
                     "transform_to_world": [
-                        [1, 0, 0, 0],
+                        [1, 0, 0, 5.0],
                         [0, 1, 0, 0],
                         [0, 0, 1, 0],
                         [0, 0, 0, 1]
                     ],
-                    "voxel_size": 0.02,
+                    "voxel_size": 0.05,
                     "passthrough": [
                         {
                             "field_name": "z",
-                            "limits": [-0.35, 0.95]
+                            "limits": [-10.0, 10.0]
                         },
                         {
                             "field_name": "y",
-                            "limits": [-0.85, 0.80]
+                            "limits": [-10.0, 10.0]
                         },
                         {
                             "field_name": "x",
-                            "limits": [0.0, 1.6]
+                            "limits": [0.0, 40.0]
                         }
                     ]
                 }

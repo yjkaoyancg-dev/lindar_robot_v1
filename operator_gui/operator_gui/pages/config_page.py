@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import re
 from typing import Any
 
 from PySide6.QtWidgets import QGridLayout, QGroupBox, QLabel, QPlainTextEdit, QTabWidget, QVBoxLayout, QWidget
@@ -77,7 +78,8 @@ class ConfigPage(QWidget):
         filter_cfg = first_lidar.get("filter", {}) if isinstance(first_lidar, dict) else {}
 
         self.lidar_sn.setText(sn)
-        self.pointcloud_topic.setText(str(range_cfg.get("topic_name", f"/pointcloud_{sn}" if sn != "-" else "-")))
+        fallback_topic = f"/pointcloud_{self._ros_safe_name(sn)}" if sn != "-" else "-"
+        self.pointcloud_topic.setText(str(range_cfg.get("topic_name", fallback_topic)))
         self.transform.setText(self._translation_text(filter_cfg.get("transform_to_world")))
         self.passthrough.setText(self._passthrough_text(filter_cfg.get("passthrough")))
         self.roi.setText(
@@ -149,3 +151,9 @@ class ConfigPage(QWidget):
             if isinstance(item, dict):
                 parts.append(f"{item.get('field_name', '?')}={item.get('limits', '-')}")
         return "; ".join(parts) if parts else "-"
+
+    def _ros_safe_name(self, value: str) -> str:
+        safe = re.sub(r"[^A-Za-z0-9_]", "_", value)
+        if not safe or safe[0].isdigit():
+            safe = f"_{safe}"
+        return safe

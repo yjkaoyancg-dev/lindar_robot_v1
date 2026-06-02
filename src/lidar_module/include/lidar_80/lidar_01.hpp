@@ -94,7 +94,7 @@ class Lidar01 : public LidarNode {
      */
     void createPublisher() {
         pointcloud_publisher_ =
-            this->create_publisher<sensor_msgs::msg::PointCloud2>("/pointcloud_" + lidar_config_.sn, 10);
+            this->create_publisher<sensor_msgs::msg::PointCloud2>("/pointcloud_" + makeRosSafeName(lidar_config_.sn), 10);
     }
 
     /**
