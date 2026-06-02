@@ -10,15 +10,15 @@ class OverviewPage(QWidget):
         super().__init__()
         layout = QVBoxLayout(self)
 
-        title = QLabel("System Overview")
+        title = QLabel("系统总览")
         title.setObjectName("Title")
         layout.addWidget(title)
 
-        self.safety_badge = QLabel("PLC output gate: checking configuration")
+        self.safety_badge = QLabel("PLC 输出开关：正在读取配置")
         self.safety_badge.setObjectName("BadgeWarn")
         layout.addWidget(self.safety_badge)
 
-        status_group = QGroupBox("Runtime Status")
+        status_group = QGroupBox("运行状态")
         status_grid = QGridLayout(status_group)
         self.mode = QLabel("-")
         self.ros = QLabel("-")
@@ -27,19 +27,19 @@ class OverviewPage(QWidget):
         self.detected = QLabel("-")
         self.plc = QLabel("-")
         rows = [
-            ("Detector mode", self.mode),
-            ("ROS observer", self.ros),
-            ("Configured lidar", self.lidar),
-            ("Point cloud", self.pointcloud),
-            ("Range detection", self.detected),
-            ("PLC mode", self.plc),
+            ("检测模式", self.mode),
+            ("ROS 观察状态", self.ros),
+            ("已配置雷达", self.lidar),
+            ("点云状态", self.pointcloud),
+            ("检测状态", self.detected),
+            ("PLC 模式", self.plc),
         ]
         for row, (name, widget) in enumerate(rows):
             status_grid.addWidget(QLabel(name), row, 0)
             status_grid.addWidget(widget, row, 1)
         layout.addWidget(status_group)
 
-        pose_group = QGroupBox("Current Target")
+        pose_group = QGroupBox("当前目标")
         pose_grid = QGridLayout(pose_group)
         self.pose_source = QLabel("-")
         self.pose_value = QLabel("-")
@@ -47,23 +47,23 @@ class OverviewPage(QWidget):
         self.confidence = QLabel("-")
         self.updated_at = QLabel("-")
         rows = [
-            ("Source", self.pose_source),
-            ("Position x/y/z", self.pose_value),
-            ("Attitude roll/pitch/yaw", self.attitude_value),
-            ("Confidence", self.confidence),
-            ("Updated", self.updated_at),
+            ("数据来源", self.pose_source),
+            ("位置 x/y/z", self.pose_value),
+            ("姿态 roll/pitch/yaw", self.attitude_value),
+            ("置信度", self.confidence),
+            ("更新时间", self.updated_at),
         ]
         for row, (name, widget) in enumerate(rows):
             pose_grid.addWidget(QLabel(name), row, 0)
             pose_grid.addWidget(widget, row, 1)
         layout.addWidget(pose_group)
 
-        hint_group = QGroupBox("Field Workflow")
+        hint_group = QGroupBox("现场操作顺序")
         hint = QLabel(
-            "1. Confirm lidar SN and point cloud topic.  "
-            "2. Set transform_to_world and ROI.  "
-            "3. Verify point cloud and target result.  "
-            "4. Enable PLC output only after field checks."
+            "1. 确认雷达 SN 和点云话题。  "
+            "2. 设置 transform_to_world 坐标矩阵和 ROI 检测区域。  "
+            "3. 检查点云和目标识别结果。  "
+            "4. 现场确认无误后再打开 PLC 输出。"
         )
         hint.setWordWrap(True)
         hint_layout = QVBoxLayout(hint_group)
@@ -76,16 +76,16 @@ class OverviewPage(QWidget):
         plc_cfg = cfg.plc_config
         output_enabled = bool(plc_cfg.get("output_enabled", False))
         if output_enabled:
-            self.safety_badge.setText("PLC output gate: ENABLED by configuration")
+            self.safety_badge.setText("PLC 输出开关：已在配置中启用")
             self.safety_badge.setObjectName("BadgeWarn")
         else:
-            self.safety_badge.setText("PLC output gate: disabled / dry-run safe")
+            self.safety_badge.setText("PLC 输出开关：关闭，当前为安全调试状态")
             self.safety_badge.setObjectName("BadgeDryRun")
         self.safety_badge.style().unpolish(self.safety_badge)
         self.safety_badge.style().polish(self.safety_badge)
 
         self.mode.setText(cfg.detector_mode)
-        self.ros.setText("online" if state.ros_available else "offline or rclpy not available")
+        self.ros.setText("在线" if state.ros_available else "离线或未加载 rclpy")
         self.lidar.setText(self._lidar_summary(state))
         self.pointcloud.setText(self._pointcloud_summary(state))
         self.detected.setText(self._detected_summary(state))
@@ -124,12 +124,12 @@ class OverviewPage(QWidget):
     def _pointcloud_summary(self, state: AppState) -> str:
         clouds = [frame for name, frame in state.pointclouds.items() if name.startswith("/pointcloud_")]
         if not clouds:
-            return "waiting"
+            return "等待点云"
         frame = sorted(clouds, key=lambda item: item.topic)[0]
         updated = frame.updated_at.strftime("%H:%M:%S") if frame.updated_at else "-"
-        return f"{frame.topic}, points={frame.point_count}, {updated}"
+        return f"{frame.topic}，点数={frame.point_count}，{updated}"
 
     def _detected_summary(self, state: AppState) -> str:
         if state.range_detected is None:
-            return "unknown"
-        return "detected" if state.range_detected else "not detected"
+            return "未知"
+        return "已检测到" if state.range_detected else "未检测到"

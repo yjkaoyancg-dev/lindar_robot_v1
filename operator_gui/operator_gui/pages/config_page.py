@@ -13,18 +13,18 @@ class ConfigPage(QWidget):
         super().__init__()
         layout = QVBoxLayout(self)
 
-        title = QLabel("Configuration")
+        title = QLabel("配置参数")
         title.setObjectName("Title")
         layout.addWidget(title)
 
         note = QLabel(
-            "Read only view. Edit JSON files in configs/runtime, then run deploy/install_runtime_assets.sh "
-            "and restart the stack."
+            "只读查看。修改 configs/runtime 里的 JSON 后，需要运行 deploy/install_runtime_assets.sh "
+            "并重启程序。"
         )
         note.setObjectName("BadgeDryRun")
         layout.addWidget(note)
 
-        field_group = QGroupBox("Field Parameters To Check")
+        field_group = QGroupBox("现场需要重点检查的参数")
         grid = QGridLayout(field_group)
         self.lidar_sn = QLabel("-")
         self.pointcloud_topic = QLabel("-")
@@ -37,16 +37,16 @@ class ConfigPage(QWidget):
         self.plc_device = QLabel("-")
         self.output_gate = QLabel("-")
         rows = [
-            ("Lidar SN", self.lidar_sn),
-            ("Point cloud topic", self.pointcloud_topic),
-            ("Transform translation", self.transform),
-            ("Passthrough", self.passthrough),
-            ("Detection ROI", self.roi),
-            ("Scan axis", self.scan_axis),
-            ("Bin range", self.bin_range),
-            ("Density thresholds", self.thresholds),
-            ("PLC serial/device", self.plc_device),
-            ("PLC output gate", self.output_gate),
+            ("雷达 SN", self.lidar_sn),
+            ("点云话题", self.pointcloud_topic),
+            ("坐标矩阵平移量", self.transform),
+            ("点云粗过滤范围", self.passthrough),
+            ("检测 ROI 区域", self.roi),
+            ("扫描轴", self.scan_axis),
+            ("分段范围", self.bin_range),
+            ("密度阈值", self.thresholds),
+            ("PLC 串口/地址", self.plc_device),
+            ("PLC 输出开关", self.output_gate),
         ]
         for row, (name, widget) in enumerate(rows):
             grid.addWidget(QLabel(name), row, 0)
@@ -59,10 +59,10 @@ class ConfigPage(QWidget):
         self.range_json = self._json_editor()
         self.plc_json = self._json_editor()
         self.detect_json = self._json_editor()
-        self.tabs.addTab(self.lidar_json, "lidar_config")
-        self.tabs.addTab(self.range_json, "range_density")
-        self.tabs.addTab(self.plc_json, "plc")
-        self.tabs.addTab(self.detect_json, "cluster detect")
+        self.tabs.addTab(self.lidar_json, "雷达配置")
+        self.tabs.addTab(self.range_json, "密度检测")
+        self.tabs.addTab(self.plc_json, "PLC 配置")
+        self.tabs.addTab(self.detect_json, "聚类检测")
         layout.addWidget(self.tabs, 1)
 
     def update_state(self, state: AppState) -> None:

@@ -10,28 +10,28 @@ class PointCloudPage(QWidget):
     def __init__(self) -> None:
         super().__init__()
         layout = QVBoxLayout(self)
-        title = QLabel("Point Cloud Monitor")
+        title = QLabel("点云监控")
         title.setObjectName("Title")
         layout.addWidget(title)
 
-        safety = QLabel("Read only: observes ROS2 point cloud topics and does not control devices.")
+        safety = QLabel("只读显示：订阅 ROS2 点云话题，不控制设备。")
         safety.setObjectName("BadgeDryRun")
         layout.addWidget(safety)
 
-        group = QGroupBox("Cloud Status")
+        group = QGroupBox("点云状态")
         grid = QGridLayout(group)
         self.raw_status = QLabel("-")
         self.target_status = QLabel("-")
         self.centroid = QLabel("-")
         self.detected = QLabel("-")
         self.projection = QComboBox()
-        self.projection.addItems(["XY projection", "XZ projection", "YZ projection"])
+        self.projection.addItems(["XY 投影", "XZ 投影", "YZ 投影"])
         rows = [
-            ("Raw cloud", self.raw_status),
-            ("Target cloud", self.target_status),
-            ("Current target", self.centroid),
-            ("Detected", self.detected),
-            ("View", self.projection),
+            ("原始点云", self.raw_status),
+            ("目标点云", self.target_status),
+            ("当前目标", self.centroid),
+            ("检测状态", self.detected),
+            ("显示视图", self.projection),
         ]
         for row, (name, widget) in enumerate(rows):
             grid.addWidget(QLabel(name), row, 0)
@@ -55,9 +55,9 @@ class PointCloudPage(QWidget):
         pose = state.robot_info if state.robot_info.updated_at else state.robot_info_range
         self.centroid.setText(f"x={pose.x:.4f}, y={pose.y:.4f}, z={pose.z:.4f}")
         if state.range_detected is None:
-            self.detected.setText("unknown")
+            self.detected.setText("未知")
         else:
-            self.detected.setText("detected" if state.range_detected else "not detected")
+            self.detected.setText("已检测到" if state.range_detected else "未检测到")
 
         self._set_axis_labels()
         if raw:
@@ -88,9 +88,9 @@ class PointCloudPage(QWidget):
 
     def _format_cloud(self, cloud: PointCloudFrame | None) -> str:
         if cloud is None:
-            return "waiting"
+            return "等待点云"
         updated = cloud.updated_at.strftime("%H:%M:%S") if cloud.updated_at else "-"
-        return f"{cloud.topic}, points={cloud.point_count}, {cloud.note}, {updated}"
+        return f"{cloud.topic}，点数={cloud.point_count}，{cloud.note}，{updated}"
 
     def _project(self, points: list[tuple[float, float, float]]) -> tuple[list[float], list[float]]:
         mode = self.projection.currentText()

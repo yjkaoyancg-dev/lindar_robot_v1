@@ -40,7 +40,7 @@ class MainWindow(QMainWindow):
         self.config_reader = ConfigReader(repo_root)
         self.log_reader = LogReader()
         self.export_service = ExportService()
-        self.setWindowTitle("Lidar Robot Operator GUI")
+        self.setWindowTitle("雷达机器人操作界面")
         self.resize(1280, 820)
         QApplication.instance().setStyleSheet(APP_STYLE)
 
@@ -76,7 +76,7 @@ class MainWindow(QMainWindow):
         nav.setObjectName("NavFrame")
         nav.setFixedWidth(220)
         nav_layout = QVBoxLayout(nav)
-        title = QLabel("Lidar Robot\nOperator")
+        title = QLabel("雷达机器人\n操作界面")
         title.setObjectName("Title")
         nav_layout.addWidget(title)
 
@@ -92,15 +92,15 @@ class MainWindow(QMainWindow):
         self.export_page = ExportPage(self.export_service, self)
 
         pages = [
-            ("Overview", self.overview_page),
-            ("Device Status", self.device_page),
-            ("Device Scan", self.device_scan_page),
-            ("Point Cloud", self.pointcloud_page),
-            ("Results", self.result_page),
-            ("Configuration", self.config_page),
-            ("PLC Read Only", self.plc_page),
-            ("Export", self.export_page),
-            ("Logs", self.logs_page),
+            ("总览", self.overview_page),
+            ("设备状态", self.device_page),
+            ("设备扫描", self.device_scan_page),
+            ("点云监控", self.pointcloud_page),
+            ("识别结果", self.result_page),
+            ("配置参数", self.config_page),
+            ("PLC 通讯", self.plc_page),
+            ("导出", self.export_page),
+            ("日志", self.logs_page),
         ]
         self.nav_buttons: list[QPushButton] = []
         for index, (name, page) in enumerate(pages):
@@ -111,7 +111,7 @@ class MainWindow(QMainWindow):
             nav_layout.addWidget(button)
             self.nav_buttons.append(button)
         nav_layout.addStretch(1)
-        footer = QLabel("READ ONLY\nDRY-RUN")
+        footer = QLabel("只读模式\n安全调试")
         footer.setObjectName("BadgeDryRun")
         nav_layout.addWidget(footer)
 

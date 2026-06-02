@@ -36,34 +36,34 @@ class DeviceScanPage(QWidget):
         layout = QVBoxLayout(self)
 
         header = QHBoxLayout()
-        title = QLabel("Device Scan")
+        title = QLabel("设备扫描")
         title.setObjectName("Title")
         header.addWidget(title)
         header.addStretch(1)
-        self.scan_button = QPushButton("Refresh scan")
+        self.scan_button = QPushButton("刷新扫描")
         self.scan_button.clicked.connect(self.scan_requested.emit)
         header.addWidget(self.scan_button)
         layout.addLayout(header)
 
-        safety = QLabel("Read only: scans visible candidates and does not write configuration or open PLC outputs.")
+        safety = QLabel("只读扫描：只显示候选设备，不写配置，不打开 PLC 输出。")
         safety.setObjectName("BadgeDryRun")
         layout.addWidget(safety)
 
-        layout.addWidget(QLabel("Configured lidar"))
+        layout.addWidget(QLabel("当前配置中的雷达"))
         self.configured_lidar_table = QTableWidget(0, 4)
-        self.configured_lidar_table.setHorizontalHeaderLabels(["Type", "Group", "SN", "Note"])
+        self.configured_lidar_table.setHorizontalHeaderLabels(["类型", "组", "SN", "备注"])
         self.configured_lidar_table.horizontalHeader().setStretchLastSection(True)
         layout.addWidget(self.configured_lidar_table)
 
-        layout.addWidget(QLabel("Passive lidar candidates"))
+        layout.addWidget(QLabel("被动监听到的雷达候选"))
         self.lidar_table = QTableWidget(0, 5)
-        self.lidar_table.setHorizontalHeaderLabels(["Source IP", "Port", "Possible SN", "Packets", "Note"])
+        self.lidar_table.setHorizontalHeaderLabels(["来源 IP", "端口", "可能 SN", "包数", "备注"])
         self.lidar_table.horizontalHeader().setStretchLastSection(True)
         layout.addWidget(self.lidar_table)
 
-        layout.addWidget(QLabel("Serial candidates"))
+        layout.addWidget(QLabel("串口候选"))
         self.serial_table = QTableWidget(0, 5)
-        self.serial_table.setHorizontalHeaderLabels(["Device path", "Real path", "Role hint", "Source", "Note"])
+        self.serial_table.setHorizontalHeaderLabels(["设备路径", "真实路径", "角色提示", "来源", "备注"])
         self.serial_table.horizontalHeader().setStretchLastSection(True)
         layout.addWidget(self.serial_table)
 
@@ -75,7 +75,7 @@ class DeviceScanPage(QWidget):
         if self._scan_thread and self._scan_thread.isRunning():
             return
         self.scan_button.setEnabled(False)
-        self.scan_button.setText("Scanning...")
+        self.scan_button.setText("扫描中...")
         self._scan_thread = ScanThread(runtime_config)
         self._scan_thread.completed.connect(self._on_scan_completed)
         self._scan_thread.start()
@@ -106,6 +106,6 @@ class DeviceScanPage(QWidget):
 
     def _on_scan_completed(self, result: DeviceScanResult) -> None:
         self.scan_button.setEnabled(True)
-        self.scan_button.setText("Refresh scan")
+        self.scan_button.setText("刷新扫描")
         self.render_scan_result(result)
         self.scan_completed.emit(result)

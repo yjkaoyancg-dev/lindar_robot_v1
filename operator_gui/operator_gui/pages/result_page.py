@@ -12,11 +12,11 @@ class ResultPage(QWidget):
         self._history: list[tuple[float, float, float, float]] = []
 
         layout = QVBoxLayout(self)
-        title = QLabel("Detection Results")
+        title = QLabel("识别结果")
         title.setObjectName("Title")
         layout.addWidget(title)
 
-        group = QGroupBox("Current Result")
+        group = QGroupBox("当前结果")
         grid = QGridLayout(group)
         self.raw = QLabel("-")
         self.output = QLabel("-")
@@ -24,11 +24,11 @@ class ResultPage(QWidget):
         self.conf = QLabel("-")
         self.updated = QLabel("-")
         rows = [
-            ("Range pose", self.raw),
-            ("PLC payload pose", self.output),
-            ("Detected", self.detected),
-            ("Confidence", self.conf),
-            ("Last update", self.updated),
+            ("密度检测坐标", self.raw),
+            ("PLC 输出坐标", self.output),
+            ("是否检测到", self.detected),
+            ("置信度", self.conf),
+            ("最近更新", self.updated),
         ]
         for row, (name, widget) in enumerate(rows):
             grid.addWidget(QLabel(name), row, 0)
@@ -50,9 +50,9 @@ class ResultPage(QWidget):
         self.raw.setText(f"x={pose.x:.4f}, y={pose.y:.4f}, z={pose.z:.4f}")
         self.output.setText(f"x={pose.x:.4f}, y={pose.y:.4f}, z={pose.z:.4f}")
         if state.range_detected is None:
-            self.detected.setText("unknown")
+            self.detected.setText("未知")
         else:
-            self.detected.setText("true" if state.range_detected else "false")
+            self.detected.setText("是" if state.range_detected else "否")
         self.conf.setText(f"{confidence:.3f}")
         self.updated.setText(pose.updated_at.strftime("%Y-%m-%d %H:%M:%S") if pose.updated_at else "-")
 

@@ -16,20 +16,20 @@ class ExportPage(QWidget):
         self.state = AppState()
 
         layout = QVBoxLayout(self)
-        title = QLabel("Export")
+        title = QLabel("数据导出")
         title.setObjectName("Title")
         layout.addWidget(title)
 
-        safety = QLabel("Read only export: saves snapshots and does not write PLC registers.")
+        safety = QLabel("只读导出：保存快照，不写 PLC 寄存器。")
         safety.setObjectName("BadgeDryRun")
         layout.addWidget(safety)
 
-        group = QGroupBox("Export Actions")
+        group = QGroupBox("导出操作")
         grid = QGridLayout(group)
-        self.result_button = QPushButton("Export detection JSON")
-        self.config_button = QPushButton("Export config summary")
-        self.logs_button = QPushButton("Export log snapshot")
-        self.screenshot_button = QPushButton("Save GUI screenshot")
+        self.result_button = QPushButton("导出识别结果 JSON")
+        self.config_button = QPushButton("导出配置摘要")
+        self.logs_button = QPushButton("导出日志快照")
+        self.screenshot_button = QPushButton("保存界面截图")
         self.result_button.clicked.connect(self._export_detection)
         self.config_button.clicked.connect(self._export_config)
         self.logs_button.clicked.connect(self._export_logs)
@@ -41,7 +41,7 @@ class ExportPage(QWidget):
         layout.addWidget(group)
 
         self.export_dir_label = QLabel(str(self.export_service.export_root))
-        layout.addWidget(QLabel("Export directory"))
+        layout.addWidget(QLabel("导出目录"))
         layout.addWidget(self.export_dir_label)
 
         self.output = QPlainTextEdit()

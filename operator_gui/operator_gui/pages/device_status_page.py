@@ -9,12 +9,12 @@ class DeviceStatusPage(QWidget):
     def __init__(self) -> None:
         super().__init__()
         layout = QVBoxLayout(self)
-        title = QLabel("Device Status")
+        title = QLabel("设备状态")
         title.setObjectName("Title")
         layout.addWidget(title)
 
         self.table = QTableWidget(0, 4)
-        self.table.setHorizontalHeaderLabels(["Device/topic", "Status", "Last data", "Note"])
+        self.table.setHorizontalHeaderLabels(["设备/话题", "状态", "最近数据", "备注"])
         self.table.horizontalHeader().setStretchLastSection(True)
         layout.addWidget(self.table)
 
@@ -30,14 +30,14 @@ class DeviceStatusPage(QWidget):
                     continue
                 for item in group:
                     if isinstance(item, dict):
-                        rows.append((f"lidar {item.get('sn', '-')}", "configured", "-", f"{kind} group {group_index}"))
+                        rows.append((f"雷达 {item.get('sn', '-')}", "已配置", "-", f"{kind} 第 {group_index} 组"))
 
         for topic in state.topics.values():
             last_seen = topic.last_seen.strftime("%H:%M:%S") if topic.last_seen else "-"
-            rows.append((topic.name, "online", last_seen, f"count={topic.message_count} {topic.last_value}"))
+            rows.append((topic.name, "在线", last_seen, f"计数={topic.message_count} {topic.last_value}"))
 
         if not rows:
-            rows.append(("system", "waiting", "-", "no configured device or ROS topic yet"))
+            rows.append(("系统", "等待", "-", "暂未读取到设备或 ROS 话题"))
 
         self.table.setRowCount(len(rows))
         for row, values in enumerate(rows):

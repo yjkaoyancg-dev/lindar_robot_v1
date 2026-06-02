@@ -13,13 +13,21 @@ class LogsPage(QWidget):
         title = QLabel("日志与报警（只读）")
         title.setObjectName("Title")
         layout.addWidget(title)
+
         self.tabs = QTabWidget()
         self.editors: dict[str, QPlainTextEdit] = {}
-        for name in ["lidar", "detector", "range_detector", "range_bridge", "plc"]:
+        tab_names = {
+            "lidar": "雷达",
+            "detector": "检测",
+            "range_detector": "密度检测",
+            "range_bridge": "检测桥接",
+            "plc": "PLC",
+        }
+        for name, label in tab_names.items():
             editor = QPlainTextEdit()
             editor.setReadOnly(True)
             self.editors[name] = editor
-            self.tabs.addTab(editor, name)
+            self.tabs.addTab(editor, label)
         layout.addWidget(self.tabs)
 
     def refresh(self) -> None:
@@ -27,4 +35,3 @@ class LogsPage(QWidget):
         for name, text in logs.items():
             if name in self.editors:
                 self.editors[name].setPlainText(text)
-
