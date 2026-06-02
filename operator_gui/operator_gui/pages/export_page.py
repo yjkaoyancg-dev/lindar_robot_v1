@@ -2,15 +2,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from PySide6.QtWidgets import (
-    QGridLayout,
-    QGroupBox,
-    QLabel,
-    QPushButton,
-    QPlainTextEdit,
-    QVBoxLayout,
-    QWidget,
-)
+from PySide6.QtWidgets import QGridLayout, QGroupBox, QLabel, QPushButton, QPlainTextEdit, QVBoxLayout, QWidget
 
 from ..export_service import ExportService
 from ..models import AppState
@@ -24,20 +16,20 @@ class ExportPage(QWidget):
         self.state = AppState()
 
         layout = QVBoxLayout(self)
-        title = QLabel("数据导出（只读）")
+        title = QLabel("Export")
         title.setObjectName("Title")
         layout.addWidget(title)
 
-        safety = QLabel("PR5 只读导出 / DRY-RUN / 不写 PLC / 不连接串口 / 不控制设备")
+        safety = QLabel("Read only export: saves snapshots and does not write PLC registers.")
         safety.setObjectName("BadgeDryRun")
         layout.addWidget(safety)
 
-        group = QGroupBox("导出操作")
+        group = QGroupBox("Export Actions")
         grid = QGridLayout(group)
-        self.result_button = QPushButton("导出当前检测结果 JSON")
-        self.config_button = QPushButton("导出当前配置摘要")
-        self.logs_button = QPushButton("导出当前日志快照")
-        self.screenshot_button = QPushButton("保存当前 GUI 截图")
+        self.result_button = QPushButton("Export detection JSON")
+        self.config_button = QPushButton("Export config summary")
+        self.logs_button = QPushButton("Export log snapshot")
+        self.screenshot_button = QPushButton("Save GUI screenshot")
         self.result_button.clicked.connect(self._export_detection)
         self.config_button.clicked.connect(self._export_config)
         self.logs_button.clicked.connect(self._export_logs)
@@ -49,7 +41,7 @@ class ExportPage(QWidget):
         layout.addWidget(group)
 
         self.export_dir_label = QLabel(str(self.export_service.export_root))
-        layout.addWidget(QLabel("导出目录"))
+        layout.addWidget(QLabel("Export directory"))
         layout.addWidget(self.export_dir_label)
 
         self.output = QPlainTextEdit()

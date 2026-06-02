@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-from PySide6.QtWidgets import QGridLayout, QGroupBox, QLabel, QVBoxLayout, QWidget
 import pyqtgraph as pg
+from PySide6.QtWidgets import QGridLayout, QGroupBox, QLabel, QVBoxLayout, QWidget
 
 from ..models import AppState
 
@@ -10,23 +10,27 @@ class ResultPage(QWidget):
     def __init__(self) -> None:
         super().__init__()
         self._history: list[tuple[float, float, float, float]] = []
+
         layout = QVBoxLayout(self)
-        title = QLabel("识别结果")
+        title = QLabel("Detection Results")
         title.setObjectName("Title")
         layout.addWidget(title)
 
-        group = QGroupBox("当前结果")
+        group = QGroupBox("Current Result")
         grid = QGridLayout(group)
         self.raw = QLabel("-")
         self.output = QLabel("-")
+        self.detected = QLabel("-")
         self.conf = QLabel("-")
         self.updated = QLabel("-")
-        for row, (name, widget) in enumerate([
-            ("原始雷达坐标", self.raw),
-            ("PLC 输出坐标", self.output),
-            ("置信度", self.conf),
-            ("最近更新时间", self.updated),
-        ]):
+        rows = [
+            ("Range pose", self.raw),
+            ("PLC payload pose", self.output),
+            ("Detected", self.detected),
+            ("Confidence", self.conf),
+            ("Last update", self.updated),
+        ]
+        for row, (name, widget) in enumerate(rows):
             grid.addWidget(QLabel(name), row, 0)
             grid.addWidget(widget, row, 1)
         layout.addWidget(group)
@@ -38,13 +42,17 @@ class ResultPage(QWidget):
         self.y_curve = self.plot.plot(pen=pg.mkPen("#22c55e", width=2), name="y")
         self.z_curve = self.plot.plot(pen=pg.mkPen("#f97316", width=2), name="z")
         self.c_curve = self.plot.plot(pen=pg.mkPen("#e879f9", width=2), name="confidence")
-        layout.addWidget(self.plot)
+        layout.addWidget(self.plot, 1)
 
     def update_state(self, state: AppState) -> None:
         pose = state.robot_info if state.robot_info.updated_at else state.robot_info_range
         confidence = state.range_confidence if state.range_confidence is not None else pose.confidence
         self.raw.setText(f"x={pose.x:.4f}, y={pose.y:.4f}, z={pose.z:.4f}")
-        self.output.setText(f"x={pose.x:.4f}, y={pose.y:.4f}, z={pose.z:.4f} (identity)")
+        self.output.setText(f"x={pose.x:.4f}, y={pose.y:.4f}, z={pose.z:.4f}")
+        if state.range_detected is None:
+            self.detected.setText("unknown")
+        else:
+            self.detected.setText("true" if state.range_detected else "false")
         self.conf.setText(f"{confidence:.3f}")
         self.updated.setText(pose.updated_at.strftime("%Y-%m-%d %H:%M:%S") if pose.updated_at else "-")
 
@@ -58,4 +66,3 @@ class ResultPage(QWidget):
             self.y_curve.setData(xs, [p[1] for p in self._history])
             self.z_curve.setData(xs, [p[2] for p in self._history])
             self.c_curve.setData(xs, [p[3] for p in self._history])
-
