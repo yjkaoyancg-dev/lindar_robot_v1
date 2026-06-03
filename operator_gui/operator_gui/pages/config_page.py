@@ -4,7 +4,17 @@ import json
 import re
 from typing import Any
 
-from PySide6.QtWidgets import QGridLayout, QGroupBox, QLabel, QPlainTextEdit, QTabWidget, QVBoxLayout, QWidget
+from PySide6.QtCore import Qt
+from PySide6.QtWidgets import (
+    QGridLayout,
+    QGroupBox,
+    QLabel,
+    QPlainTextEdit,
+    QSplitter,
+    QTabWidget,
+    QVBoxLayout,
+    QWidget,
+)
 
 from ..models import AppState
 
@@ -20,10 +30,14 @@ class ConfigPage(QWidget):
 
         note = QLabel(
             "只读查看。修改 configs/runtime 里的 JSON 后，需要运行 deploy/install_runtime_assets.sh "
-            "并重启程序。"
+            "并重启程序。下方“详细配置”区域可以拖动分隔条调整高度。"
         )
         note.setObjectName("BadgeDryRun")
+        note.setWordWrap(True)
         layout.addWidget(note)
+
+        splitter = QSplitter(Qt.Orientation.Vertical)
+        layout.addWidget(splitter, 1)
 
         field_group = QGroupBox("现场需要重点检查的参数")
         grid = QGridLayout(field_group)
@@ -53,8 +67,10 @@ class ConfigPage(QWidget):
             grid.addWidget(QLabel(name), row, 0)
             widget.setWordWrap(True)
             grid.addWidget(widget, row, 1)
-        layout.addWidget(field_group)
+        splitter.addWidget(field_group)
 
+        detail_group = QGroupBox("详细配置")
+        detail_layout = QVBoxLayout(detail_group)
         self.tabs = QTabWidget()
         self.lidar_json = self._json_editor()
         self.range_json = self._json_editor()
@@ -64,7 +80,10 @@ class ConfigPage(QWidget):
         self.tabs.addTab(self.range_json, "密度检测")
         self.tabs.addTab(self.plc_json, "PLC 配置")
         self.tabs.addTab(self.detect_json, "聚类检测")
-        layout.addWidget(self.tabs, 1)
+        detail_layout.addWidget(self.tabs)
+        splitter.addWidget(detail_group)
+        splitter.setSizes([300, 480])
+        splitter.setChildrenCollapsible(False)
 
     def update_state(self, state: AppState) -> None:
         lidar = state.runtime_config.lidar_config
@@ -108,17 +127,29 @@ class ConfigPage(QWidget):
         else:
             tcp = plc.get("tcp", {})
             self.plc_device.setText(f"{tcp.get('ip', '-')}:{tcp.get('port', '-')}")
-        self.output_gate.setText("true" if bool(plc.get("output_enabled", False)) else "false")
+        self.output_gate.setText("开启" if bool(plc.get("output_enabled", False)) else "关闭")
 
-        self.lidar_json.setPlainText(self._pretty(lidar))
-        self.range_json.setPlainText(self._pretty(range_cfg))
-        self.plc_json.setPlainText(self._pretty(plc))
-        self.detect_json.setPlainText(self._pretty(detect))
+        self._set_editor_text_preserve_scroll(self.lidar_json, self._pretty(lidar))
+        self._set_editor_text_preserve_scroll(self.range_json, self._pretty(range_cfg))
+        self._set_editor_text_preserve_scroll(self.plc_json, self._pretty(plc))
+        self._set_editor_text_preserve_scroll(self.detect_json, self._pretty(detect))
 
     def _json_editor(self) -> QPlainTextEdit:
         editor = QPlainTextEdit()
         editor.setReadOnly(True)
+        editor.setLineWrapMode(QPlainTextEdit.LineWrapMode.NoWrap)
         return editor
+
+    def _set_editor_text_preserve_scroll(self, editor: QPlainTextEdit, text: str) -> None:
+        if editor.toPlainText() == text:
+            return
+        vertical = editor.verticalScrollBar()
+        horizontal = editor.horizontalScrollBar()
+        old_v = vertical.value()
+        old_h = horizontal.value()
+        editor.setPlainText(text)
+        vertical.setValue(min(old_v, vertical.maximum()))
+        horizontal.setValue(min(old_h, horizontal.maximum()))
 
     def _pretty(self, data: Any) -> str:
         return json.dumps(data, indent=2, ensure_ascii=False)

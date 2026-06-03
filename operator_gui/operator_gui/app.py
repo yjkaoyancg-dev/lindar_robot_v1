@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-from pathlib import Path
 import re
+from pathlib import Path
 
 from PySide6.QtCore import QThread, QTimer
 from PySide6.QtWidgets import (
@@ -41,7 +41,7 @@ class MainWindow(QMainWindow):
         self.config_reader = ConfigReader(repo_root)
         self.log_reader = LogReader()
         self.export_service = ExportService()
-        self.setWindowTitle("雷达机器人操作界面")
+        self.setWindowTitle("清仓机器人操作界面")
         self.resize(1280, 820)
         QApplication.instance().setStyleSheet(APP_STYLE)
 
@@ -77,7 +77,7 @@ class MainWindow(QMainWindow):
         nav.setObjectName("NavFrame")
         nav.setFixedWidth(220)
         nav_layout = QVBoxLayout(nav)
-        title = QLabel("雷达机器人\n操作界面")
+        title = QLabel("清仓机器人\n操作界面")
         title.setObjectName("Title")
         nav_layout.addWidget(title)
 
@@ -201,7 +201,10 @@ class MainWindow(QMainWindow):
                 topics.add(str(topic))
         lidar_config = self.state.runtime_config.lidar_config
         for kind in ("lidar80", "lidar180"):
-            for group in lidar_config.get(kind, []) if isinstance(lidar_config.get(kind, []), list) else []:
+            groups = lidar_config.get(kind, [])
+            if not isinstance(groups, list):
+                continue
+            for group in groups:
                 if not isinstance(group, list):
                     continue
                 for item in group:
