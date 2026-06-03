@@ -152,7 +152,49 @@ class ConfigPage(QWidget):
         horizontal.setValue(min(old_h, horizontal.maximum()))
 
     def _pretty(self, data: Any) -> str:
-        return json.dumps(data, indent=2, ensure_ascii=False)
+        return self._format_json(data)
+
+    def _format_json(self, data: Any, level: int = 0) -> str:
+        indent = "  " * level
+        child_indent = "  " * (level + 1)
+
+        if isinstance(data, dict):
+            if not data:
+                return "{}"
+            lines = ["{"]
+            items = list(data.items())
+            for index, (key, value) in enumerate(items):
+                comma = "," if index < len(items) - 1 else ""
+                lines.append(
+                    f"{child_indent}{json.dumps(str(key), ensure_ascii=False)}: "
+                    f"{self._format_json(value, level + 1)}{comma}"
+                )
+            lines.append(f"{indent}}}")
+            return "\n".join(lines)
+
+        if isinstance(data, list):
+            if not data:
+                return "[]"
+            if self._is_scalar_list(data):
+                return "[" + ", ".join(self._format_json(item, 0) for item in data) + "]"
+            if all(isinstance(item, list) and self._is_scalar_list(item) for item in data):
+                lines = ["["]
+                for index, item in enumerate(data):
+                    comma = "," if index < len(data) - 1 else ""
+                    lines.append(f"{child_indent}{self._format_json(item, 0)}{comma}")
+                lines.append(f"{indent}]")
+                return "\n".join(lines)
+            lines = ["["]
+            for index, item in enumerate(data):
+                comma = "," if index < len(data) - 1 else ""
+                lines.append(f"{child_indent}{self._format_json(item, level + 1)}{comma}")
+            lines.append(f"{indent}]")
+            return "\n".join(lines)
+
+        return json.dumps(data, ensure_ascii=False)
+
+    def _is_scalar_list(self, data: list[Any]) -> bool:
+        return all(not isinstance(item, (dict, list)) for item in data)
 
     def _lidar_items(self, lidar_config: dict[str, Any]) -> list[dict[str, Any]]:
         items: list[dict[str, Any]] = []
