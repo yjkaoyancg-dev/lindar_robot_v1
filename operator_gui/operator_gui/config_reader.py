@@ -11,8 +11,8 @@ class ConfigReader:
     def __init__(self, repo_root: Path) -> None:
         self.repo_root = repo_root
         self.config_dirs = [
-            Path.home() / "deploy_v1" / "runtime" / "opt_zwkj" / "configs",
             Path("/opt/zwkj/configs"),
+            Path.home() / "deploy_v1" / "runtime" / "opt_zwkj" / "configs",
             self.repo_root / "configs" / "runtime",
         ]
 
