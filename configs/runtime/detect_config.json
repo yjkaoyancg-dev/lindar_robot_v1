@@ -1,5 +1,5 @@
 {
-    "topic_name": "/pointcloud_BAX49K59_ZWSCAN80",
+    "topic_name": "/pointcloud_BAX49K59",
     "feature_dir": "/opt/zwkj/templates",
     "save_clusters_dir": "/home/zwkj01/robot_detect/clusters",
     "is_pub_clusters": false,

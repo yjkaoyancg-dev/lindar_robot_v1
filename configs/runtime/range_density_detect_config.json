@@ -1,5 +1,5 @@
 {
-    "topic_name": "/pointcloud_BAX49K59_ZWSCAN80",
+    "topic_name": "/pointcloud_BAX49K59",
     "output_pose_topic": "/robot_info_range",
     "output_detected_topic": "/range_detector/detected",
     "output_confidence_topic": "/range_detector/confidence",
